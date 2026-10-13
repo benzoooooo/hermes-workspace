@@ -333,7 +333,7 @@ function SettingsRoute() {
   }, [])
 
   const { section } = Route.useSearch()
-  const activeSection: SettingsSectionId = section ?? 'claude'
+  const activeSection: SettingsSectionId = section ?? 'connection'
 
   return (
     <div className="min-h-screen bg-surface text-primary-900">
@@ -351,9 +351,6 @@ function SettingsRoute() {
           {activeSection === 'connection' && <ConnectionSection />}
 
           {/* ── AWG GPT ──────────────────────────────────── */}
-          {activeSection === 'claude' && (
-            <ClaudeConfigSection activeView="claude" />
-          )}
           {activeSection === 'agent' && (
             <ClaudeConfigSection activeView="agent" />
           )}

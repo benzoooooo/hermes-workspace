@@ -16,7 +16,6 @@ type NavItem = { id: SettingsNavId; label: string }
 
 export const SETTINGS_NAV_ITEMS: Array<NavItem> = [
   { id: 'connection', label: 'Подключение' },
-  { id: 'claude', label: 'Модель и провайдер' },
   { id: 'agent', label: 'Поведение агента' },
   { id: 'voice', label: 'Голос' },
   { id: 'display', label: 'Отображение' },

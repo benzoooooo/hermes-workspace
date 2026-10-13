@@ -74,7 +74,6 @@ type SectionId =
   | 'language'
 
 const SECTIONS: Array<{ id: SectionId; label: string; icon: any }> = [
-  { id: 'claude', label: 'Модель и провайдер', icon: CloudIcon },
   { id: 'agent', label: 'Агент', icon: Settings02Icon },
   { id: 'voice', label: 'Голос', icon: VolumeHighIcon },
   { id: 'display', label: 'Отображение', icon: PaintBoardIcon },
@@ -2491,15 +2490,16 @@ type SettingsDialogProps = {
 export function SettingsDialog({
   open,
   onOpenChange,
-  initialSection = 'claude',
+  initialSection = 'agent',
 }: SettingsDialogProps) {
-  const [active, setActive] = useState<SectionId>(initialSection)
+  const resolveSection = (s: SectionId): SectionId => (s === 'claude' ? 'agent' : s)
+  const [active, setActive] = useState<SectionId>(resolveSection(initialSection))
   const [mobileView, setMobileView] = useState<'nav' | 'content'>('nav')
   const ActiveContent = CONTENT_MAP[active]
 
   useEffect(() => {
     if (open) {
-      setActive(initialSection)
+      setActive(resolveSection(initialSection))
       setMobileView('nav')
     }
   }, [initialSection, open])
