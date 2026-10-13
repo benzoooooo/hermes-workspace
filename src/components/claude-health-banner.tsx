@@ -32,7 +32,7 @@ export function ClaudeHealthBanner({
       } catch (err) {
         if (!cancelled) {
           setStatus('error')
-          setLastError(err instanceof Error ? err.message : 'Connection failed')
+          setLastError(err instanceof Error ? err.message : 'Не удалось подключиться')
         }
       }
     }
@@ -69,14 +69,14 @@ export function ClaudeHealthBanner({
             .catch((err) => {
               setStatus('error')
               setLastError(
-                err instanceof Error ? err.message : 'Connection failed',
+                err instanceof Error ? err.message : 'Не удалось подключиться',
               )
             })
         }}
         className="ml-2 rounded px-2 py-0.5 text-xs font-semibold transition-opacity hover:opacity-80"
         style={{ background: 'rgba(255,255,255,0.2)' }}
       >
-        Retry
+        Повторить
       </button>
     </div>
   )

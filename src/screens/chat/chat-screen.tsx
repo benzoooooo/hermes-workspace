@@ -1776,7 +1776,7 @@ export function ChatScreen({
     }
     const messageText = sessionsError ?? historyError ?? statusError?.message
     if (!messageText) {
-      if (error?.startsWith('Failed to load')) {
+      if (error?.startsWith('Не удалось загрузить')) {
         setError(null)
       }
       return
@@ -2821,7 +2821,7 @@ export function ChatScreen({
                         }}
                         className="rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600"
                       >
-                        Approve
+                        Одобрить
                       </button>
                       <button
                         type="button"
@@ -2830,7 +2830,7 @@ export function ChatScreen({
                         }}
                         className="rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 dark:border-red-800/50 dark:bg-red-900/10 dark:text-red-400"
                       >
-                        Deny
+                        Отклонить
                       </button>
                     </div>
                   </div>

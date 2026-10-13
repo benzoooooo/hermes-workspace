@@ -51,7 +51,7 @@ export function TokenMixCard({
       label: 'input',
       value: analytics.inputTokens,
       tone: 'var(--theme-accent)',
-      hint: 'Prompt tokens sent to the model.',
+      hint: 'Токены запроса, отправленные модели.',
     },
     {
       label: 'output',
@@ -91,7 +91,7 @@ export function TokenMixCard({
         <span
           className="font-mono text-[9px] uppercase tracking-[0.15em]"
           style={{ color: 'var(--theme-muted)' }}
-          title="Output as % of input — proxy for how chatty the model is."
+          title="Выход в % от входа — показатель многословности модели."
         >
           out/in {ratio.toFixed(1)}%
         </span>

@@ -210,7 +210,7 @@ function ToolRow({
                 className="mb-0.5 font-sans text-[9px] uppercase tracking-widest opacity-50"
                 style={{ color: 'var(--theme-muted)' }}
               >
-                Input
+                Вход
               </div>
               <pre
                 className="max-h-32 overflow-auto whitespace-pre-wrap break-words rounded font-mono text-[10px]"
@@ -280,7 +280,7 @@ function ThinkingRow({
           className="shrink-0 font-semibold"
           style={{ color: 'var(--theme-text)' }}
         >
-          Thinking
+          Размышляет
         </span>
         <span className="flex-1" />
         {isStreaming && elapsedSeconds > 0 ? (
@@ -435,7 +435,7 @@ function TuiActivityCardComponent({
             />
             <span className="opacity-80">working…</span>
             <span className="opacity-50 text-[10px]">
-              tool activity will appear after the run
+              активность инструментов появится после запуска
             </span>
           </div>
         ) : null}

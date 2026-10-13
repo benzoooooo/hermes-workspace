@@ -114,7 +114,7 @@ type ChatState = {
   // Actions
   setConnectionState: (state: ConnectionState, error?: string) => void
   processEvent: (event: ChatStreamEvent) => void
-  getRealtimeMessages: (sessionKey: string) => Array<ChatMessage>
+  getRealtimeMessages: (sessionKey: string) => Массив<ChatMessage>
   getStreamingState: (sessionKey: string) => StreamingState | null
   clearSession: (sessionKey: string) => void
   clearRealtimeBuffer: (sessionKey: string) => void
@@ -123,7 +123,7 @@ type ChatState = {
   mergeHistoryMessages: (
     sessionKey: string,
     historyMessages: Array<ChatMessage>,
-  ) => Array<ChatMessage>
+  ) => Массив<ChatMessage>
   /** Register a runId as being handled by send-stream — chat-events will skip it */
   registerSendStreamRun: (runId: string) => void
   /** Unregister a runId when send-stream completes */

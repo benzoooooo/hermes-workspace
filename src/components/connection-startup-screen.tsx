@@ -24,25 +24,25 @@ function getSetupSteps(
 ): Array<{ title: string; command: string; note?: string }> {
   return [
     {
-      title: 'Use any OpenAI-compatible backend',
-      command: 'Set HERMES_API_URL to your backend base URL',
+      title: 'Любой OpenAI-совместимый бэкенд',
+      command: 'Укажите базовый URL бэкенда в HERMES_API_URL',
       note: 'Portable chat works with any backend that exposes /v1/chat/completions (Ollama, LiteLLM, vLLM, etc.)',
     },
     {
-      title: 'Optional: install AWG GPT locally',
+      title: 'По желанию: установить AWG GPT локально',
       command:
         'curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash',
-      note: 'Vanilla hermes-agent unlocks sessions, skills, memory, jobs, and config automatically — no fork required',
+      note: 'Сессии, навыки, память, задания и конфигурация включаются автоматически — форк не нужен',
     },
     {
-      title: 'Set up your agent',
+      title: 'Настройте агента',
       command: 'hermes setup',
       note: 'Pick your providers once; AWG GPT stores them under ~/.hermes',
     },
     {
-      title: 'Start the gateway',
+      title: 'Запустить шлюз',
       command: 'hermes gateway run',
-      note: 'This starts the HTTP API on :8642 for the workspace',
+      note: 'Запускает HTTP API на :8642 для рабочего пространства',
     },
   ]
 }
@@ -239,7 +239,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
           aria-hidden={showFailureState}
         >
           <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white/80" />
-          <span>Connecting to your backend...</span>
+          <span>Подключаюсь к бэкенду...</span>
         </div>
 
         {/* Failure state — setup guide */}
@@ -256,9 +256,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
               Welcome! Let&apos;s connect your backend
             </p>
             <p className="mt-2 text-sm leading-6 text-[#F3F1F6]/60">
-              AWG GPT works with any OpenAI-compatible backend. AWG GPT
-              gateway APIs unlock enhanced features automatically when they are
-              available.
+              AWG GPT работает с любым OpenAI-совместимым бэкендом. Расширенные функции включаются автоматически, когда API шлюза доступен.
             </p>
 
             {/* Auto-start section */}
@@ -373,7 +371,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
 
         {!showFailureState ? (
           <p className="mt-6 text-xs text-[#F3F1F6]/45">
-            This page auto-refreshes when a compatible backend is detected
+            Страница обновится автоматически, когда будет найден совместимый бэкенд
           </p>
         ) : null}
       </div>

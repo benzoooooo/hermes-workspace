@@ -290,7 +290,7 @@ export function useStreamingMessage(options: UseStreamingMessageOptions = {}) {
         markFailed(
           reason === 'handoff'
             ? 'Run stalled after handoff'
-            : 'No activity received after message was accepted',
+            : 'После принятия сообщения активности нет',
         )
       }, timeoutMs)
     },
@@ -500,7 +500,7 @@ export function useStreamingMessage(options: UseStreamingMessageOptions = {}) {
           pushActivity({
             type: 'assistant_start',
             time: new Date().toLocaleTimeString(),
-            text: 'Assistant started',
+            text: 'Ассистент запущен',
           })
           processStoreEvent({
             type: 'chunk',
@@ -998,7 +998,7 @@ export function useStreamingMessage(options: UseStreamingMessageOptions = {}) {
             (lifecyclePhase === 'accepted' || lifecyclePhase === 'active')
           ) {
             markFailed(
-              'Connection closed before response was received. The backend may still be processing — check server logs or retry.',
+              'Соединение закрылось до получения ответа. Бэкенд может ещё обрабатывать запрос — проверьте журналы сервера или повторите.',
             )
           } else {
             finishStream()

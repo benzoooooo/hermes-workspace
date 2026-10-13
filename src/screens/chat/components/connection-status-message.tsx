@@ -24,9 +24,9 @@ function classifyConnectionError(
 
   if (!normalizedError && !status) {
     return {
-      title: 'Not connected',
-      description: "AWG GPT can't reach AWG GPT.",
-      action: 'Check that AWG GPT is running, then try again.',
+      title: 'Не подключено',
+      description: "AWG GPT не может подключиться к шлюзу.",
+      action: 'Убедитесь, что AWG GPT запущен, и повторите попытку.',
     }
   }
 
@@ -37,9 +37,9 @@ function classifyConnectionError(
     lower.includes('unauthorized')
   ) {
     return {
-      title: 'Authentication required',
-      description: 'AWG GPT rejected the connection token.',
-      action: 'Go to Settings -> Advanced -> AWG GPT to update your token.',
+      title: 'Требуется аутентификация',
+      description: 'AWG GPT отклонил токен подключения.',
+      action: 'Откройте «Настройки → Дополнительно → AWG GPT», чтобы обновить токен.',
     }
   }
 
@@ -49,17 +49,17 @@ function classifyConnectionError(
     lower.includes('not paired')
   ) {
     return {
-      title: 'Pairing required',
-      description: "This device isn't paired with AWG GPT yet.",
-      action: 'Check AWG GPT connection.',
+      title: 'Требуется сопряжение',
+      description: "Это устройство ещё не подключено к AWG GPT.",
+      action: 'Проверьте подключение AWG GPT.',
     }
   }
 
   if (lower.includes('econnrefused') && lower.includes('8642')) {
     return {
-      title: 'AWG GPT gateway not running',
-      description: 'The AWG GPT gateway is not running on port 8642.',
-      action: 'Run the official Hermes installer, then start the gateway with: hermes gateway run',
+      title: 'Шлюз AWG GPT не запущен',
+      description: 'Шлюз AWG GPT не запущен на порту 8642.',
+      action: 'Запустите официальный установщик, затем стартуйте шлюз командой: hermes gateway run',
     }
   }
 
@@ -71,16 +71,16 @@ function classifyConnectionError(
     lower.includes('timeout')
   ) {
     return {
-      title: 'AWG GPT unreachable',
-      description: "Can't connect to AWG GPT at the configured URL.",
-      action: 'Make sure AWG GPT is running and the URL is correct.',
+      title: 'AWG GPT недоступен',
+      description: "Не удаётся подключиться к AWG GPT по указанному URL.",
+      action: 'Убедитесь, что AWG GPT запущен, а URL указан верно.',
     }
   }
 
   return {
-    title: 'Connection error',
+    title: 'Ошибка подключения',
     description: normalizedError || 'Something went wrong.',
-    action: 'Try refreshing or check Settings -> Advanced -> AWG GPT.',
+    action: 'Обновите страницу или проверьте «Настройки → Дополнительно → AWG GPT».',
   }
 }
 
@@ -150,7 +150,7 @@ export function ConnectionStatusMessage({
             onClick={onRetry}
             className="shrink-0 rounded-md border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 transition-colors hover:bg-amber-200 dark:hover:bg-amber-900/30"
           >
-            Retry
+            Повторить
           </button>
         )}
       </div>

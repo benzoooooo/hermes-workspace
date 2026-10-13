@@ -394,7 +394,7 @@ function UpdateCard({
                 color: 'var(--theme-muted)',
               }}
             >
-              Review required
+              Требуется проверка
             </span>
           )}
           <button
@@ -459,7 +459,7 @@ function ReleaseNotes({
             <div className="min-w-0 flex-1">
               <p className="text-base font-semibold">AWG GPT обновлён</p>
               <p className="text-sm" style={{ color: 'var(--theme-muted)' }}>
-                What changed in this update.
+                Что изменилось в этом обновлении.
               </p>
             </div>
             <button
@@ -513,7 +513,7 @@ function ReleaseNotes({
               className="rounded-lg px-4 py-2 text-sm font-semibold text-white"
               style={{ background: 'var(--theme-accent)' }}
             >
-              Continue
+              Продолжить
             </button>
           </div>
         </motion.div>

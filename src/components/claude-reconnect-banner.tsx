@@ -156,7 +156,7 @@ export function ClaudeReconnectBanner({
             wasDisconnectedRef.current = true
             setBannerState('disconnected')
             setMessage(
-              error instanceof Error ? error.message : 'Connection failed',
+              error instanceof Error ? error.message : 'Не удалось подключиться',
             )
           }
           return false
@@ -210,7 +210,7 @@ export function ClaudeReconnectBanner({
       }
 
       if (!response.ok || !payload.ok) {
-        throw new Error(payload.error || 'Failed to start AWG GPT')
+        throw new Error(payload.error || 'Не удалось запустить AWG GPT')
       }
 
       setMessage(
@@ -220,7 +220,7 @@ export function ClaudeReconnectBanner({
       )
     } catch (error) {
       setMessage(
-        error instanceof Error ? error.message : 'Failed to start AWG GPT',
+        error instanceof Error ? error.message : 'Не удалось запустить AWG GPT',
       )
     } finally {
       setIsStarting(false)
