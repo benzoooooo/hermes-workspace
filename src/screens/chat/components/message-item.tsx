@@ -1113,7 +1113,7 @@ function ToolCallPill({ toolCall }: { toolCall: StreamToolCall }) {
       className="rounded-lg border border-primary-200 bg-primary-50 text-[11px] max-w-full overflow-hidden"
       style={{
         borderLeftWidth: '3px',
-        borderLeftColor: isRunning ? '#6366f1' : isDone ? '#22c55e' : '#ef4444',
+        borderLeftColor: isRunning ? 'var(--theme-accent, #7657c7)' : isDone ? '#22c55e' : '#ef4444',
         transition: 'border-color 0.3s',
         boxShadow: isRunning ? '0 0 8px rgba(99,102,241,0.15)' : 'none',
       }}
@@ -1145,7 +1145,7 @@ function ToolCallPill({ toolCall }: { toolCall: StreamToolCall }) {
         {isDone && <span className="shrink-0 text-xs text-green-500">✅</span>}
         {isError && <span className="shrink-0 text-xs text-red-500">❌</span>}
         {isRunning && (
-          <span className="shrink-0 size-1.5 rounded-full animate-pulse bg-indigo-500" />
+          <span className="shrink-0 size-1.5 rounded-full animate-pulse bg-[#7657c7]" />
         )}
       </button>
       {isRunning && !expanded && (

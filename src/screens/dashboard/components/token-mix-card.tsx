@@ -18,7 +18,7 @@ type Slice = {
 /**
  * Token mix card. Pure derive-from-aggregator: shows the input vs
  * output vs cache vs reasoning split as a stacked horizontal bar plus
- * a tiny legend table. The Hermes Agent confirmed this is chartable
+ * a tiny legend table. The AWG GPT confirmed this is chartable
  * today from `daily[].input_tokens / output_tokens / cache_read_tokens
  * / reasoning_tokens` (no backend change required).
  *

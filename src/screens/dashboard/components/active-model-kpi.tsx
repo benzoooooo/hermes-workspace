@@ -30,7 +30,7 @@ export function ActiveModelKpi({
   const provider = modelInfo?.provider ?? '—'
 
   // Routing share (proxy): % of calls in the analytics window that hit
-  // the active model. Hermes Agent confirmed this is the closest
+  // the active model. AWG GPT confirmed this is the closest
   // available metric without a dedicated routing-decisions endpoint.
   const share = ((): number | null => {
     if (!modelInfo || !analytics) return null

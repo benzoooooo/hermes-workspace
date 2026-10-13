@@ -98,7 +98,7 @@ const PROVIDERS: Array<Provider> = [
     id: 'openrouter',
     name: 'OpenRouter',
     description:
-      'One Hermes Agent connection to 200+ AI models. Ideal for flexibility and experimentation',
+      'One AWG GPT connection to 200+ AI models. Ideal for flexibility and experimentation',
     badge: 'Popular',
     logo: <OpenRouterLogo className="size-8" />,
     placeholder: 'sk-or-v1-...',

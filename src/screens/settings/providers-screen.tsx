@@ -136,7 +136,7 @@ type SaveSettingPayload = {
 }
 
 // Models are fetched through the workspace API proxy to support Docker and
-// reverse-proxy deployments where the browser cannot reach Hermes Agent directly.
+// reverse-proxy deployments where the browser cannot reach AWG GPT directly.
 
 type ClaudeCatalogEntry =
   | string
@@ -292,7 +292,7 @@ const SETTINGS: Array<SettingDefinition> = [
     min: 1,
     step: 1000,
   },
-  // Thinking/reasoning settings removed — not supported by Hermes Agent
+  // Thinking/reasoning settings removed — not supported by AWG GPT
   // Legacy settings removed: bootstrap, block streaming,
   // compaction, thinking, verbose, and fast mode do not apply here.
   {
@@ -1128,13 +1128,13 @@ function ActiveModelCard({
         </p>
       ) : configQuery.error ? (
         <p className="mt-4 text-sm text-red-500">
-          Could not load config — is Hermes Agent running?
+          Could not load config — is AWG GPT running?
         </p>
       ) : (
         <div className="mt-5 space-y-4">
           <ModelConfigSection
             title="Primary Model"
-            description="Default provider, model, and base URL used for new Hermes Agent requests."
+            description="Default provider, model, and base URL used for new AWG GPT requests."
             value={primaryConfig}
             onChange={setPrimaryConfig}
             modelOptions={modelOptions}
@@ -1149,7 +1149,7 @@ function ActiveModelCard({
                   Fallback Model
                 </h3>
                 <p className="text-sm text-primary-600">
-                  Optional secondary model Hermes Agent can use if the primary path
+                  Optional secondary model AWG GPT can use if the primary path
                   fails.
                 </p>
               </div>
@@ -1233,7 +1233,7 @@ function ActiveModelCard({
 
             <p className="mt-4 rounded-xl border border-[var(--theme-border)] bg-[var(--theme-card2)] px-3 py-2 text-sm text-primary-600">
               Slow local runners such as Ollama and `llama-server` often need
-              more headroom before Hermes Agent decides a stream has stalled.
+              more headroom before AWG GPT decides a stream has stalled.
             </p>
           </section>
         </div>
@@ -1304,14 +1304,14 @@ function ProviderManagementSection(props: {
 
         {modelsQuery.isPending ? (
           <p className="rounded-xl border border-primary-200 bg-white px-3 py-2 text-sm text-primary-600">
-            Loading providers from Hermes Agent...
+            Loading providers from AWG GPT...
           </p>
         ) : null}
 
         {modelsQuery.error ? (
           <div className="rounded-xl border border-primary-200 bg-white px-4 py-3">
             <p className="mb-2 text-sm text-primary-700">
-              Unable to load providers right now. Check your Hermes Agent connection.
+              Unable to load providers right now. Check your AWG GPT connection.
             </p>
             <Button
               variant="outline"
@@ -1620,7 +1620,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
                 Settings
               </h1>
               <p className="text-sm text-primary-600">
-                Configure providers plus Hermes Agent defaults in one place.
+                Configure providers plus AWG GPT defaults in one place.
               </p>
             </div>
 

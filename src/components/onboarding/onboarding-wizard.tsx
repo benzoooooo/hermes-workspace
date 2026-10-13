@@ -147,7 +147,7 @@ export function OnboardingWizard() {
                         {step.id === 'welcome' ? (
                           <img
                             src="/claude-avatar.webp"
-                            alt="Hermes Agent"
+                            alt="AWG GPT"
                             className="size-16 rounded-2xl"
                           />
                         ) : (

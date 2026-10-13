@@ -41,7 +41,7 @@ export const OFFICE_MODEL_BADGE: Record<ModelPresetId, string> = {
   flash: 'border border-violet-200 bg-violet-50 text-violet-700',
   minimax: 'border border-amber-200 bg-amber-50 text-amber-700',
   'pc1-coder': 'border border-cyan-200 bg-cyan-50 text-cyan-700',
-  'pc1-planner': 'border border-indigo-200 bg-indigo-50 text-indigo-700',
+  'pc1-planner': 'border border-[#d0cad9] bg-[#f3f1f6] text-[#573a9b]',
   'pc1-critic': 'border border-purple-200 bg-purple-50 text-purple-700',
 }
 

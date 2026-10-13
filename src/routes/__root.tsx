@@ -84,8 +84,8 @@ const themeColorScript = `
     const root = document.documentElement
     const theme = root.getAttribute('data-theme') || '${DEFAULT_THEME}'
     const colors = {
-      'claude-nous': '#031A1A',
-      'claude-nous-light': '#F8FAF8',
+      'claude-nous': '#141316',
+      'claude-nous-light': '#F3F1F6',
       'claude-official': '#0A0E1A',
       'claude-official-light': '#F7F7F1',
       'claude-classic': '#0d0f12',
@@ -109,10 +109,9 @@ const themeColorScript = `
 `
 
 const DEFAULT_SPLASH_HTML = `
-<img src="/claude-avatar.webp" alt="Hermes Agent" style="width:80px;height:80px;margin-bottom:20px;border-radius:16px;filter:drop-shadow(0 8px 32px color-mix(in srgb,#FFAC02 45%, transparent))" />
-<img src="/claude-banner.png" alt="Hermes Workspace" style="width:280px;height:auto;margin-bottom:8px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))" />
-<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:#9CB2AE">Workspace</div>
-<div style="margin-top:28px;width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative"><div id="splash-bar" style="width:0%;height:100%;background:#FFAC02;border-radius:3px;transition:width 0.4s ease"></div></div>
+<img src="/claude-banner.png" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))" />
+<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:#a59aaf">Корпоративное пространство для работы с ИИ</div>
+<div style="margin-top:28px;width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative"><div id="splash-bar" style="width:0%;height:100%;background:#B79CFF;border-radius:3px;transition:width 0.4s ease"></div></div>
 `
 
 export const Route = createRootRoute({
@@ -127,12 +126,12 @@ export const Route = createRootRoute({
           'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual',
       },
       {
-        title: 'Hermes Workspace',
+        title: 'AWG GPT',
       },
       {
         name: 'description',
         content:
-          'Hermes Agent workspace for chat, tools, files, memory, and jobs.',
+          'AWG GPT — корпоративное пространство для работы с большими языковыми моделями.',
       },
       {
         property: 'og:image',
@@ -153,7 +152,7 @@ export const Route = createRootRoute({
       // PWA meta tags
       {
         name: 'theme-color',
-        content: '#0A0E1A',
+        content: '#141316',
       },
       {
         name: 'apple-mobile-web-app-capable',
@@ -171,8 +170,14 @@ export const Route = createRootRoute({
       },
       {
         rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/favicon.svg',
+      },
+      {
+        rel: 'icon',
         type: 'image/png',
-        href: '/claude-avatar.png',
+        sizes: '96x96',
+        href: '/favicon-96x96.png',
       },
       // PWA manifest and icons
       {
@@ -393,7 +398,7 @@ function RootLayout() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <head>
         {/* Content-Security-Policy is set as an HTTP response header in
             server-entry.js and vite.config.ts. Don't re-emit it as a `<meta>`
@@ -441,19 +446,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             if (location.pathname === '/hermes-world' || location.pathname.indexOf('/hermes-world/') === 0 || location.pathname === '/world' || location.pathname.indexOf('/world/') === 0) return;
             var d = document.getElementById('splash-screen');
             if (!d) return;
-            var bg = '#031A1A', txt = '#F8F1E3', muted = '#9CB2AE', accent = '#FFAC02';
+            var bg = '#141316', txt = '#F3F1F6', muted = '#A59AAF', accent = '#B79CFF';
             try {
               var theme = localStorage.getItem('${THEME_STORAGE_KEY}') || '${DEFAULT_THEME}';
               if (theme === 'claude-nous') {
-                bg = '#031A1A';
-                txt = '#F8F1E3';
-                muted = '#9CB2AE';
-                accent = '#FFAC02';
+                bg = '#141316';
+                txt = '#F3F1F6';
+                muted = '#A59AAF';
+                accent = '#B79CFF';
               } else if (theme === 'claude-nous-light') {
-                bg = '#F8FAF8';
-                txt = '#16315F';
-                muted = '#6F7D96';
-                accent = '#2557B7';
+                bg = '#F3F1F6';
+                txt = '#19171D';
+                muted = '#6E637A';
+                accent = '#7657C7';
               } else if (theme === 'claude-classic') {
                 bg = '#0d0f12';
                 txt = '#eceff4';
@@ -487,9 +492,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             var quip = quips[Math.floor(Math.random() * quips.length)];
 
             d.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:'+bg+';transition:opacity 0.5s ease;';
-            d.innerHTML = '<img src="/claude-avatar.webp" alt="Hermes Agent" style="width:80px;height:80px;margin-bottom:20px;border-radius:16px;filter:drop-shadow(0 8px 32px color-mix(in srgb,'+accent+' 45%, transparent))" />'
-              + '<img src="'+(isDark ? '/claude-banner.png' : '/claude-banner-light.png')+'" alt="Hermes Workspace" style="width:280px;height:auto;margin-bottom:8px;filter:drop-shadow(0 4px 16px '+(isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)')+')" />'
-              + '<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:'+muted+'">Workspace</div>'
+            d.innerHTML = ''
+              + '<img src="'+(isDark ? '/claude-banner.png' : '/claude-banner-light.png')+'" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px '+(isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)')+')" />'
+              + '<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:'+muted+'">Корпоративное пространство для работы с ИИ</div>'
               + '<div style="margin-top:28px;width:140px;height:3px;background:'+(isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)')+';border-radius:3px;overflow:hidden;position:relative"><div id=splash-bar style="width:0%;height:100%;background:'+accent+';border-radius:3px;transition:width 0.4s ease"></div></div>';
 
             var bar = document.getElementById('splash-bar');

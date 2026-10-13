@@ -411,7 +411,7 @@ function SkillsWidget({
     )
   }
 
-  // Summary view per Hermes Agent feedback: 'don’t enumerate, summarise.'
+  // Summary view per AWG GPT feedback: 'don’t enumerate, summarise.'
   // Prefer real usage signal from /api/analytics/usage when present
   // (counts what the agent *actually used*, not just what's installed).
   const installed = skills.length
@@ -875,7 +875,7 @@ export function DashboardScreen() {
       <div className="px-4 pt-14 md:pt-4 py-4 md:px-8 md:py-6 lg:px-10 space-y-5 pb-28">
       {/* ── Header: brand lockup left, action cluster right.
            Iteration 010: dropped redundant "Dashboard" eyebrow (the
-           page IS the dashboard); promoted "Hermes Workspace" to
+           page IS the dashboard); promoted "AWG GPT" to
            the primary heading at a larger weight. Logo bumped from
            36px → 44px and gets a soft accent glow + ring so the
            lockup commands the left side instead of feeling like
@@ -900,7 +900,7 @@ export function DashboardScreen() {
           >
             <img
               src="/claude-avatar.webp"
-              alt="Hermes Workspace logo"
+              alt="AWG GPT logo"
               className="size-8 rounded-md"
               style={{ background: 'transparent' }}
             />
@@ -920,11 +920,11 @@ export function DashboardScreen() {
                 lineHeight: 1.1,
               }}
             >
-              Hermes Workspace
+              AWG GPT
             </h1>
           </div>
         </div>
-        {/* Action row: hierarchy per Hermes Agent review.
+        {/* Action row: hierarchy per AWG GPT review.
            New Chat is primary (full button + accent), Terminal +
            Skills are secondary, Settings collapses to icon-only. */}
         <div className="flex w-full flex-wrap items-center gap-2 lg:justify-end lg:max-w-xl">

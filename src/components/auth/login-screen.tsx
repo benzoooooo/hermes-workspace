@@ -61,7 +61,7 @@ export function LoginScreen() {
                 <circle cx="50" cy="50" r="15" fill="currentColor" />
               </svg>
               <h1 className="text-2xl font-bold tracking-tight text-primary-900">
-                Hermes Workspace
+                AWG GPT
               </h1>
             </div>
           </div>
@@ -113,7 +113,7 @@ export function LoginScreen() {
             rel="noopener noreferrer"
             className="text-accent-500 hover:text-accent-600 transition-colors"
           >
-            Hermes Agent
+            AWG GPT
           </a>
         </p>
       </div>

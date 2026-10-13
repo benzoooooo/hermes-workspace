@@ -294,7 +294,7 @@ export function AgentCommandCenter({
                 }
               >
                 <HugeiconsIcon icon={PlusSignIcon} size={16} />
-                New Hermes chat
+                Новый чат
               </Button>
             )}
           </div>
@@ -370,9 +370,9 @@ export function AgentCommandCenter({
                       <HugeiconsIcon icon={Chat01Icon} size={18} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-medium">Hermes</span>
+                      <span className="block text-sm font-medium">AWG GPT</span>
                       <span className="block truncate text-xs text-primary-500">
-                        Native workspace · {nativeSessions.length} sessions
+                        Рабочее пространство · {nativeSessions.length} sessions
                       </span>
                     </span>
                     <span className="size-2 rounded-full bg-emerald-500" />
@@ -381,7 +381,7 @@ export function AgentCommandCenter({
                     type="button"
                     onClick={() => toggleHarness('hermes-native')}
                     className="mr-2 flex size-8 items-center justify-center rounded-lg text-primary-300 opacity-0 transition-opacity hover:bg-primary-200 hover:text-primary-700 group-hover:opacity-100 focus:opacity-100"
-                    aria-label="Hide native Hermes"
+                    aria-label="Hide native AWG GPT"
                     title="Hide harness"
                   >
                     <HugeiconsIcon icon={EyeIcon} size={16} />

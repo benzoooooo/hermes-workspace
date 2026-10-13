@@ -112,7 +112,7 @@ const MODEL_BADGE_COLOR: Record<ModelPresetId, string> = {
   flash: 'bg-violet-100 text-violet-700',
   minimax: 'bg-amber-100 text-amber-700',
   'pc1-coder': 'bg-cyan-100 text-cyan-700',
-  'pc1-planner': 'bg-indigo-100 text-indigo-700',
+  'pc1-planner': 'bg-[#e9e4f5] text-[#573a9b]',
   'pc1-critic': 'bg-purple-100 text-purple-700',
 }
 

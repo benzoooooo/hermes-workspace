@@ -183,7 +183,7 @@ type ModelSwitchNotice = {
 
 // Models are fetched through the workspace API proxy (/api/models, /api/claude-proxy)
 // to support Docker and reverse-proxy deployments where the browser cannot reach
-// the Hermes Agent gateway directly.
+// the AWG GPT gateway directly.
 
 function readModelText(value: unknown): string {
   return typeof value === 'string' ? value.trim() : ''
@@ -1191,7 +1191,7 @@ function ChatComposerComponent({
 
   const currentModel = currentModelQuery.data ?? ''
 
-  // Auto-switch to hermes-agent model on mount (Hermes Workspace uses Hermes Agent)
+  // Auto-switch to hermes-agent model on mount (AWG GPT uses AWG GPT)
   // Removed: auto-switch to hermes-agent. The workspace respects the
   // model/provider configured in ~/.hermes/config.yaml. Users switch
   // via the model selector or Settings page.
@@ -1226,7 +1226,7 @@ function ChatComposerComponent({
   // Derive the label directly from the store so navigation between sessions
   // updates without a render-window flash from a stale React-state mirror.
   const modelButtonLabel =
-    persistedSessionModel || currentModel || configuredModel || '⚕ Hermes Agent'
+    persistedSessionModel || currentModel || configuredModel || 'AWG GPT'
 
   // Measure composer height and set CSS variable for scroll padding
   useLayoutEffect(() => {
@@ -2454,7 +2454,7 @@ function ChatComposerComponent({
                           }}
                           className="rounded-xl border border-neutral-100 bg-neutral-50 dark:bg-neutral-800 dark:border-neutral-700 p-3 flex flex-col items-start gap-2 text-left disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          <span className="rounded-lg bg-indigo-100 dark:bg-indigo-900/30 p-1.5 text-indigo-600 dark:text-indigo-400">
+                          <span className="rounded-lg bg-[#e9e4f5] dark:bg-[#2f2352]/30 p-1.5 text-[#6847b8] dark:text-[#a98bf5]">
                             <HugeiconsIcon
                               icon={ArrowDown01Icon}
                               size={24}

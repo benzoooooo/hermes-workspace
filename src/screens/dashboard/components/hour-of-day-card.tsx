@@ -4,7 +4,7 @@ import { useMemo } from 'react'
  * Hour-of-day activity heatmap.
  *
  * Backend doesn't expose `activity.by_hour[]` from `/api/analytics/usage`
- * yet (the Hermes Agent confirmed it's computed internally but dropped
+ * yet (the AWG GPT confirmed it's computed internally but dropped
  * at the API boundary). We rebuild it locally from the session list
  * the dashboard already has — every session row has `startedAt`, so we
  * bucket those into 24 hour-of-day cells.

@@ -28,7 +28,7 @@ const MODEL_BADGE: Record<string, string> = {
   flash:         'bg-violet-100 text-violet-700 dark:bg-violet-950/70 dark:text-violet-400',
   'pc1-planner': 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300',
   'pc1-coder':   'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-  'pc1-critic':  'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300',
+  'pc1-critic':  'bg-[#e9e4f5] text-[#573a9b] dark:bg-[#2f2352]/30 dark:text-[#b79cff]',
   'pc1-fast':    'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
   'pc1-heavy':   'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
   'pc1-fmt':      'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',

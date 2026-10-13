@@ -360,7 +360,7 @@ function TuiActivityCardComponent({
 
   // During streaming with nothing to show yet, render a minimal "working" stub
   // so we don't pretend the agent is thinking when no thinking text was emitted.
-  // (Hermes Agent currently emits tool.completed only after the run, not live.)
+  // (AWG GPT currently emits tool.completed only after the run, not live.)
   const isWorkingStub = !hasThinking && !hasTools && isStreaming
   if (!hasThinking && !hasTools && !isWorkingStub) return null
 

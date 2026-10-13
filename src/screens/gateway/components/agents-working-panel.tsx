@@ -63,7 +63,7 @@ const MODEL_BADGE: Record<string, string> = {
   flash:         'border border-violet-200 bg-violet-50 text-violet-700',
   'pc1-planner': 'border border-teal-200 bg-teal-50 text-teal-700',
   'pc1-coder':   'border border-purple-200 bg-purple-50 text-purple-700',
-  'pc1-critic':  'border border-indigo-200 bg-indigo-50 text-indigo-700',
+  'pc1-critic':  'border border-[#d0cad9] bg-[#f3f1f6] text-[#573a9b]',
   'pc1-fast':    'border border-slate-200 bg-slate-50 text-slate-700',
   'pc1-heavy':   'border border-cyan-200 bg-cyan-50 text-cyan-700',
   'pc1-fmt':      'border border-zinc-200 bg-zinc-50 text-zinc-700',

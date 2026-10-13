@@ -146,7 +146,7 @@ function ToolCallCard({ name, phase }: { name: string; phase: string }) {
       className="rounded-lg border border-primary-200 bg-primary-50 text-[11px] overflow-hidden"
       style={{
         borderLeftWidth: '3px',
-        borderLeftColor: isRunning ? '#6366f1' : isDone ? '#22c55e' : '#ef4444',
+        borderLeftColor: isRunning ? 'var(--theme-accent, #7657c7)' : isDone ? '#22c55e' : '#ef4444',
         boxShadow: isRunning ? '0 0 8px rgba(99,102,241,0.12)' : 'none',
       }}
     >
@@ -162,7 +162,7 @@ function ToolCallCard({ name, phase }: { name: string; phase: string }) {
         {isDone && <span className="text-xs text-green-500">✅</span>}
         {isError && <span className="text-xs text-red-500">❌</span>}
         {isRunning && (
-          <span className="size-1.5 rounded-full animate-pulse bg-indigo-500" />
+          <span className="size-1.5 rounded-full animate-pulse bg-[#7657c7]" />
         )}
       </div>
       {isRunning && (

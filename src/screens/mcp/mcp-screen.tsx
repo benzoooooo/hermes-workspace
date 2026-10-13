@@ -59,14 +59,14 @@ export function McpScreen() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="space-y-1.5">
               <p className="text-xs font-medium uppercase text-primary-500 tabular-nums">
-                Hermes Workspace · MCP
+                AWG GPT · MCP
               </p>
               <h1 className="text-2xl font-medium text-ink text-balance sm:text-3xl">
                 MCP Servers
               </h1>
               <p className="text-sm text-primary-500 text-pretty sm:text-base">
                 Discover, install, and manage Model Context Protocol servers
-                exposed to Hermes Agent.
+                exposed to AWG GPT.
               </p>
             </div>
             <Button
@@ -251,7 +251,7 @@ function ServerList({ query, onEdit }: ServerListProps) {
     return (
       <EmptyCard
         title="Loading servers…"
-        description="Fetching MCP servers from Hermes Agent."
+        description="Fetching MCP servers from AWG GPT."
       />
     )
   }

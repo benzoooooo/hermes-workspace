@@ -115,18 +115,18 @@ const THEME_PREVIEWS: Record<
   { bg: string; panel: string; border: string; accent: string; text: string }
 > = {
   'claude-nous': {
-    bg: '#031a1a',
-    panel: '#082224',
+    bg: '#141316',
+    panel: '#19171d',
     border: 'rgba(255,255,255,0.12)',
-    accent: '#ffac02',
-    text: '#f8f1e3',
+    accent: '#b79cff',
+    text: '#f3f1f6',
   },
   'claude-nous-light': {
-    bg: '#F8FAF8',
-    panel: '#FBFDFB',
-    border: 'rgba(30,74,92,0.18)',
-    accent: '#2557B7',
-    text: '#16315F',
+    bg: '#F3F1F6',
+    panel: '#FBFAFD',
+    border: 'rgba(81,70,92,0.18)',
+    accent: '#7657C7',
+    text: '#19171D',
   },
   'claude-official': {
     bg: '#0A0E1A',
@@ -350,7 +350,7 @@ function SettingsRoute() {
           {/* -- Connection ------------------ */}
           {activeSection === 'connection' && <ConnectionSection />}
 
-          {/* ── Hermes Agent ──────────────────────────────────── */}
+          {/* ── AWG GPT ──────────────────────────────────── */}
           {activeSection === 'claude' && (
             <ClaudeConfigSection activeView="claude" />
           )}
@@ -946,7 +946,7 @@ function ChatDisplaySection() {
           />
         </SettingsRow>
       </SettingsSection>
-      {/* Mobile Navigation removed — not relevant for Hermes Workspace */}
+      {/* Mobile Navigation removed — not relevant for AWG GPT */}
     </>
   )
 }
@@ -1035,7 +1035,7 @@ function _LoaderStyleSection() {
   )
 }
 
-// ── Hermes Agent Configuration ──────────────────────────────────────
+// ── AWG GPT Configuration ──────────────────────────────────────
 
 type ClaudeProvider = {
   id: string
@@ -1379,7 +1379,7 @@ function ClaudeConfigSection({
   if (loading) {
     return (
       <SettingsSection
-        title="Hermes Agent"
+        title="AWG GPT"
         description="Loading configuration..."
         icon={Settings02Icon}
       >
@@ -1394,12 +1394,12 @@ function ClaudeConfigSection({
   if (!data) {
     return (
       <SettingsSection
-        title="Hermes Agent"
+        title="AWG GPT"
         description="Could not load Hermes configuration."
         icon={Settings02Icon}
       >
         <p className="text-sm" style={{ color: 'var(--theme-muted)' }}>
-          Make sure Hermes Agent is running on localhost:8642
+          Make sure AWG GPT is running on localhost:8642
         </p>
       </SettingsSection>
     )
@@ -1560,7 +1560,7 @@ function ClaudeConfigSection({
     <>
       <SettingsSection
         title="Model & Provider"
-        description="Configure the default AI model for Hermes Agent."
+        description="Configure the default AI model for AWG GPT."
         icon={SourceCodeSquareIcon}
       >
         <SettingsRow
@@ -1822,7 +1822,7 @@ function ClaudeConfigSection({
 
       <SettingsSection
         title="Memory"
-        description="Configure Hermes Agent memory and user profiles."
+        description="Configure AWG GPT memory and user profiles."
         icon={UserIcon}
       >
         <SettingsRow
@@ -2352,7 +2352,7 @@ function ClaudeConfigSection({
 
       <SettingsSection
         title="About"
-        description="Hermes Agent runtime information."
+        description="AWG GPT runtime information."
         icon={Notification03Icon}
       >
         <SettingsRow
@@ -2922,7 +2922,7 @@ function ConnectionSection() {
   return (
     <SettingsSection
       title="Connection"
-      description="Point the workspace at your Hermes Agent services. Useful for Tailscale, LAN, or remote-server setups (#101)."
+      description="Point the workspace at your AWG GPT services. Useful for Tailscale, LAN, or remote-server setups (#101)."
       icon={Link01Icon}
     >
       <div className="text-xs text-primary-600">

@@ -220,7 +220,7 @@ export function MobileHamburgerMenu() {
           <div className="flex items-center gap-2.5">
             <img
               src="/claude-avatar.webp"
-              alt="Hermes Agent"
+              alt="AWG GPT"
               className="size-8 rounded-xl shrink-0"
             />
             <div className="flex flex-col leading-tight">
@@ -228,7 +228,7 @@ export function MobileHamburgerMenu() {
                 className="font-bold text-[15px] tracking-tight"
                 style={{ color: 'var(--color-ink, #111)' }}
               >
-                Hermes Agent
+                AWG GPT
               </span>
               <span
                 className="text-[11px]"

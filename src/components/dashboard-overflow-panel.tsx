@@ -155,7 +155,7 @@ export function DashboardOverflowPanel({ open, onClose }: Props) {
             onSelect={handleSelect}
           />
           <OverflowGrid
-            title="Hermes Agent"
+            title="AWG GPT"
             items={CLAUDE_ITEMS}
             onSelect={handleSelect}
           />

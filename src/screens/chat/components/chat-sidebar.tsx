@@ -1101,14 +1101,14 @@ function ChatSidebarComponent({
               >
                 <img
                   src="/claude-avatar.webp"
-                  alt="Hermes Agent"
+                  alt="AWG GPT"
                   className="size-6 rounded-lg"
                 />
                 <span
                   className="text-sm font-semibold tracking-tight"
                   style={{ color: 'var(--theme-text)' }}
                 >
-                  Hermes Workspace
+                  AWG GPT
                 </span>
               </Link>
             </motion.div>

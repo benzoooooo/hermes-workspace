@@ -611,7 +611,7 @@ function HermesContent() {
   if (!configAvailable) {
     return (
       <BackendUnavailableState
-        feature="Hermes Agent Settings"
+        feature="AWG GPT Settings"
         description={getUnavailableReason('config')}
       />
     )
@@ -1489,7 +1489,7 @@ function AppearanceContent() {
       <div className={SETTINGS_CARD_CLASS}>
         <Row
           label="System metrics footer"
-          description="Show a persistent footer with CPU, RAM, disk, and Hermes Agent status."
+          description="Show a persistent footer with CPU, RAM, disk, and AWG GPT status."
         >
           <Switch
             checked={settings.showSystemMetricsFooter}
@@ -1980,11 +1980,11 @@ function _AdvancedContent() {
     <div className="space-y-4">
       <SectionHeader
         title="Advanced"
-        description="Hermes Agent endpoint and connectivity."
+        description="AWG GPT endpoint and connectivity."
       />
       <div className={SETTINGS_CARD_CLASS}>
         <Row
-          label="Hermes Agent URL"
+          label="AWG GPT URL"
           description="Used for API requests from Studio"
         >
           <div className="w-full max-w-sm">
@@ -1994,7 +1994,7 @@ function _AdvancedContent() {
               value={settings.claudeUrl}
               onChange={(e) => validateAndUpdateUrl(e.target.value)}
               className="h-8 w-full rounded-lg border-primary-200 text-sm"
-              aria-label="Hermes Agent URL"
+              aria-label="AWG GPT URL"
               aria-invalid={!!urlError}
               aria-describedby={urlError ? urlErrorId : undefined}
             />
@@ -2521,7 +2521,7 @@ export function SettingsDialog({
                 Settings
               </DialogTitle>
               <DialogDescription className="sr-only">
-                Configure Hermes Workspace
+                Configure AWG GPT
               </DialogDescription>
             </div>
             <DialogClose

@@ -311,7 +311,7 @@ export function CreateJobDialog({
                       prompt: event.target.value,
                     }))
                   }
-                  placeholder="What should Hermes Agent do?"
+                  placeholder="What should AWG GPT do?"
                   required
                   rows={5}
                   className="w-full resize-none rounded-xl border px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
@@ -374,7 +374,7 @@ export function CreateJobDialog({
                           onClick={() => toggleDelivery(option)}
                           title={
                             needsGateway
-                              ? `Requires Hermes Agent gateway with ${option} configured`
+                              ? `Requires AWG GPT gateway with ${option} configured`
                               : undefined
                           }
                           className="rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition-colors"

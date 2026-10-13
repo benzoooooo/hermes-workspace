@@ -1662,7 +1662,7 @@ export function ChatScreen({
           }
         : statusQuery.data && !statusQuery.data.ok
           ? {
-              message: statusQuery.data.error || 'Hermes Agent unavailable',
+              message: statusQuery.data.error || 'AWG GPT unavailable',
               status: statusQuery.data.status,
             }
           : null
@@ -1789,7 +1789,7 @@ export function ChatScreen({
       : historyError
         ? `Failed to load history. ${historyError}`
         : statusError
-          ? `Hermes Agent unavailable. ${statusError.message}`
+          ? `AWG GPT unavailable. ${statusError.message}`
           : null
     if (message) setError(message)
   }, [
@@ -2215,7 +2215,7 @@ export function ChatScreen({
 
   useEffect(() => {
     if (false) {
-      // Server connection checks removed — Hermes Agent uses direct API
+      // Server connection checks removed — AWG GPT uses direct API
       hasSeenDisconnectRef.current = true
       retriedQueuedMessageKeysRef.current.clear()
       return
