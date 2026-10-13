@@ -21,8 +21,10 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 RUN pnpm install --frozen-lockfile
 
-# Copy sources and build
+# Copy sources and build. HERMES_WORKSPACE_BASE is baked into asset URLs.
 COPY . .
+ARG HERMES_WORKSPACE_BASE=/
+ENV HERMES_WORKSPACE_BASE=$HERMES_WORKSPACE_BASE
 RUN pnpm build
 
 # ─── runtime stage ────────────────────────────────────────────────────────
@@ -48,6 +50,7 @@ COPY --from=build --chown=workspace:workspace /app/dist ./dist
 COPY --from=build --chown=workspace:workspace /app/node_modules ./node_modules
 COPY --from=build --chown=workspace:workspace /app/package.json ./package.json
 COPY --from=build --chown=workspace:workspace /app/server-entry.js ./server-entry.js
+COPY --from=build --chown=workspace:workspace /app/src/lib/workspace-base.mjs ./src/lib/workspace-base.mjs
 COPY --from=build --chown=workspace:workspace /app/skills ./skills
 COPY --chown=workspace:workspace docker/entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
@@ -56,9 +59,12 @@ ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     HERMES_API_URL=http://hermes-agent:8642
 
+ARG HERMES_WORKSPACE_BASE=/
+ENV HERMES_WORKSPACE_BASE=$HERMES_WORKSPACE_BASE
+
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD curl -fsS http://127.0.0.1:3000/ >/dev/null || exit 1
+  CMD curl -fsS http://127.0.0.1:3000/hermes/ >/dev/null || curl -fsS http://127.0.0.1:3000/ >/dev/null || exit 1
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/docker-entrypoint.sh"]
 CMD ["node", "--max-old-space-size=2048", "server-entry.js"]

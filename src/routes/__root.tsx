@@ -29,6 +29,7 @@ import {
 } from '@/components/onboarding/claude-onboarding'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { LoginScreen } from '@/components/auth/login-screen'
+import { browserShimSource, prefixRootUrl } from '../lib/workspace-base.mjs'
 
 // Content Security Policy used to be emitted here as a `<meta http-equiv>`
 // tag. That made the workspace unusable when the Cloudflare JS Challenge
@@ -107,8 +108,10 @@ const themeColorScript = `
 })()
 `
 
+const PUBLIC_BASE = import.meta.env.BASE_URL || '/'
+
 const DEFAULT_SPLASH_HTML = `
-<img src="/claude-banner.png" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))" />
+<img src="${prefixRootUrl(PUBLIC_BASE, '/claude-banner.png')}" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5))" />
 <div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:#a59aaf">Корпоративное пространство для работы с ИИ</div>
 <div style="margin-top:28px;width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative"><div id="splash-bar" style="width:0%;height:100%;background:#B79CFF;border-radius:3px;transition:width 0.4s ease"></div></div>
 `
@@ -134,7 +137,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:image',
-        content: '/cover.png',
+        content: prefixRootUrl(PUBLIC_BASE, '/cover.png'),
       },
       {
         property: 'og:image:type',
@@ -146,7 +149,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'twitter:image',
-        content: '/cover.png',
+        content: prefixRootUrl(PUBLIC_BASE, '/cover.png'),
       },
       // PWA meta tags
       {
@@ -170,22 +173,22 @@ export const Route = createRootRoute({
       {
         rel: 'icon',
         type: 'image/svg+xml',
-        href: '/favicon.svg',
+        href: prefixRootUrl(PUBLIC_BASE, '/favicon.svg'),
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '96x96',
-        href: '/favicon-96x96.png',
+        href: prefixRootUrl(PUBLIC_BASE, '/favicon-96x96.png'),
       },
       // PWA manifest and icons
       {
         rel: 'manifest',
-        href: '/manifest.json',
+        href: prefixRootUrl(PUBLIC_BASE, '/manifest.json'),
       },
       {
         rel: 'apple-touch-icon',
-        href: '/apple-touch-icon.png',
+        href: prefixRootUrl(PUBLIC_BASE, '/apple-touch-icon.png'),
         sizes: '180x180',
       },
     ],
@@ -203,7 +206,7 @@ export const Route = createRootRoute({
           {error instanceof Error ? error.message : String(error)}
         </pre>
         <button
-          onClick={() => (window.location.href = '/')}
+          onClick={() => (window.location.href = prefixRootUrl(PUBLIC_BASE, '/'))}
           className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors"
         >
           На главную
@@ -249,7 +252,9 @@ export async function registerAppServiceWorker({
     .catch(() => undefined)
 
   await serviceWorker
-    ?.register('/sw.js', { scope: '/' })
+    ?.register(prefixRootUrl(PUBLIC_BASE, '/sw.js'), {
+      scope: prefixRootUrl(PUBLIC_BASE, '/'),
+    })
     .catch((error: unknown) => {
       console.warn('PWA service worker registration failed', error)
     })
@@ -404,6 +409,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             in the HTML is unsafe when an edge proxy mutates the body. */}
         <script
           dangerouslySetInnerHTML={{
+            __html: wrapInlineScript(browserShimSource(PUBLIC_BASE)),
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
             __html: wrapInlineScript(`
           // Polyfill crypto.randomUUID for non-secure contexts (HTTP access via LAN IP)
           if (typeof crypto !== 'undefined' && !crypto.randomUUID) {
@@ -491,7 +501,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
             d.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:'+bg+';transition:opacity 0.5s ease;';
             d.innerHTML = ''
-              + '<img src="'+(isDark ? '/claude-banner.png' : '/claude-banner-light.png')+'" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px '+(isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)')+')" />'
+              + '<img src="'+((window.__HERMES_WORKSPACE_BASEPATH__||'')+(isDark ? '/claude-banner.png' : '/claude-banner-light.png'))+'" alt="AWG GPT" style="width:200px;height:auto;margin-bottom:14px;filter:drop-shadow(0 4px 16px '+(isDark ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)')+')" />'
               + '<div style="font:400 14px/1 system-ui,-apple-system,sans-serif;letter-spacing:0.04em;color:'+muted+'">Корпоративное пространство для работы с ИИ</div>'
               + '<div style="margin-top:28px;width:140px;height:3px;background:'+(isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)')+';border-radius:3px;overflow:hidden;position:relative"><div id=splash-bar style="width:0%;height:100%;background:'+accent+';border-radius:3px;transition:width 0.4s ease"></div></div>';
 

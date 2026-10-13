@@ -18,6 +18,7 @@ afterEach(() => {
   delete process.env.NODE_ENV
   delete process.env.TRUST_PROXY
   delete process.env.CLAUDE_PASSWORD
+  delete process.env.HERMES_WORKSPACE_BASE
 })
 
 describe('createSessionCookie (#123)', () => {
@@ -29,6 +30,7 @@ describe('createSessionCookie (#123)', () => {
     expect(cookie).toContain('HttpOnly')
     expect(cookie).toContain('SameSite=Strict')
     expect(cookie).toContain('Path=/')
+    expect(cookie).not.toContain('Path=/hermes')
     expect(cookie).not.toContain('Secure')
   })
 
@@ -39,6 +41,16 @@ describe('createSessionCookie (#123)', () => {
     expect(cookie).toContain('Secure')
     expect(cookie).toContain('HttpOnly')
     expect(cookie).toContain('SameSite=Strict')
+  })
+
+  it('scopes the session cookie to the workspace prefix', async () => {
+    process.env.NODE_ENV = 'development'
+    process.env.HERMES_WORKSPACE_BASE = '/hermes'
+    const { createSessionCookie } = await import('./auth-middleware')
+    const cookie = createSessionCookie('tok123')
+    expect(cookie).toContain('Path=/hermes')
+    expect(cookie).not.toContain('Path=/;')
+    expect(cookie).not.toContain('Path=/,')
   })
 
   it('respects COOKIE_SECURE=1 override in development', async () => {

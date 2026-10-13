@@ -162,7 +162,7 @@ export function RemoteAgentsPanel({ localSessionKeys }: RemoteAgentsPanelProps) 
                   type="button"
                   onClick={() => {
                     if (!s.key) return
-                    window.location.href = `/chat?session=${encodeURIComponent(s.key)}`
+                    window.location.href = `${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/chat?session=${encodeURIComponent(s.key)}`
                   }}
                   className={cn(
                     'inline-flex items-center rounded-lg border px-2 py-1 text-[10px] font-medium transition-colors',
