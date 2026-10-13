@@ -1,4 +1,5 @@
 import { createRouter } from '@tanstack/react-router'
+import { normalizeWorkspaceBase } from './lib/workspace-base.mjs'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
@@ -17,11 +18,12 @@ declare global {
 }
 
 export function resolveRouterBasepath(): string {
-  if (typeof window === 'undefined') return '/'
+  const builtIn = normalizeWorkspaceBase(import.meta.env.BASE_URL) || '/'
+  if (typeof window === 'undefined') return builtIn
   const value = window.__HERMES_WORKSPACE_BASEPATH__
-  if (typeof value !== 'string') return '/'
+  if (typeof value !== 'string') return builtIn
   const trimmed = value.trim()
-  if (!trimmed) return '/'
+  if (!trimmed) return builtIn
   // Normalize to leading slash and no trailing slash so TanStack's internal
   // pathname matching produces stable results (`basepath: ''` and trailing
   // slashes both cause subtle mismatches in route resolution).

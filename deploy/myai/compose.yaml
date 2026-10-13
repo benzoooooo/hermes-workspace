@@ -1,0 +1,36 @@
+name: awg-hermes-workspace
+
+services:
+  hermes-workspace:
+    image: ${HERMES_WORKSPACE_IMAGE:?set HERMES_WORKSPACE_IMAGE to the Nexus image built off MyAI}
+    platform: linux/amd64
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: "1"
+    env_file:
+      - ${HERMES_WORKSPACE_ENV_FILE:?set HERMES_WORKSPACE_ENV_FILE}
+    environment:
+      HOST: 0.0.0.0
+      PORT: '3000'
+      HERMES_WORKSPACE_BASE: /hermes
+      HERMES_HOME: /home/workspace/.hermes
+      COOKIE_SECURE: '1'
+      TRUST_PROXY: '1'
+    ports:
+      - '127.0.0.1:3010:3000'
+    volumes:
+      - awg-hermes-workspace-state:/home/workspace/.hermes
+      - awg-hermes-workspace-files:/workspace
+    networks:
+      - hermes_agent
+
+networks:
+  hermes_agent:
+    external: true
+    name: docker_ai
+
+volumes:
+  awg-hermes-workspace-state:
+    name: awg-hermes-workspace-state
+  awg-hermes-workspace-files:
+    name: awg-hermes-workspace-files

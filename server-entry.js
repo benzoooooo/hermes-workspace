@@ -3,9 +3,15 @@ import { readFile, stat } from 'node:fs/promises'
 import { join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import server from './dist/server/server.js'
+import {
+  normalizeWorkspaceBase,
+  prefixRootUrl,
+  stripWorkspaceBase,
+} from './src/lib/workspace-base.mjs'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const CLIENT_DIR = join(__dirname, 'dist', 'client')
+const WORKSPACE_BASE = normalizeWorkspaceBase(process.env.HERMES_WORKSPACE_BASE)
 
 // Content Security Policy — emitted as an HTTP response header on EVERY
 // response so the policy survives any edge body transformations (e.g.
@@ -136,12 +142,37 @@ const MIME_TYPES = {
   '.webmanifest': 'application/manifest+json',
 }
 
+function rewriteManifest(data) {
+  const manifest = JSON.parse(data.toString('utf8'))
+  const rewrite = (value) =>
+    typeof value === 'string' ? prefixRootUrl(WORKSPACE_BASE, value) : value
+  manifest.id = rewrite(manifest.id)
+  manifest.start_url = rewrite(manifest.start_url)
+  manifest.scope = `${WORKSPACE_BASE}/`
+  if (Array.isArray(manifest.icons)) {
+    manifest.icons = manifest.icons.map((icon) => ({
+      ...icon,
+      src: rewrite(icon.src),
+    }))
+  }
+  return Buffer.from(JSON.stringify(manifest))
+}
+
+function staticFilePath(pathname) {
+  const relativePath = pathname.replace(/^\/+/, '')
+  if (!relativePath || relativePath.split('/').includes('..')) return null
+  const filePath = join(CLIENT_DIR, relativePath)
+  if (!filePath.startsWith(`${CLIENT_DIR}/`)) return null
+  return filePath
+}
+
 async function tryServeStatic(req, res) {
   const url = new URL(
     req.url || '/',
     `http://${req.headers.host || 'localhost'}`,
   )
-  const pathname = decodeURIComponent(url.pathname)
+  const requestPath = decodeURIComponent(url.pathname)
+  const pathname = stripWorkspaceBase(WORKSPACE_BASE, requestPath)
 
   // Prevent directory traversal
   if (pathname.includes('..')) return false
@@ -152,10 +183,10 @@ async function tryServeStatic(req, res) {
   // screen. Return a real 404 instead so clients reload/recover correctly and
   // health checks can detect the broken asset reference.
   if (pathname.startsWith('/assets/')) {
-    const filePath = join(CLIENT_DIR, pathname)
-    if (!filePath.startsWith(CLIENT_DIR)) return false
+    const assetPath = staticFilePath(pathname)
+    if (!assetPath) return false
     try {
-      const fileStat = await stat(filePath)
+      const fileStat = await stat(assetPath)
       if (!fileStat.isFile()) throw new Error('not a file')
     } catch {
       res.writeHead(404, {
@@ -167,10 +198,8 @@ async function tryServeStatic(req, res) {
     }
   }
 
-  const filePath = join(CLIENT_DIR, pathname)
-
-  // Make sure the resolved path is within CLIENT_DIR
-  if (!filePath.startsWith(CLIENT_DIR)) return false
+  const filePath = staticFilePath(pathname)
+  if (!filePath) return false
 
   try {
     const fileStat = await stat(filePath)
@@ -178,7 +207,10 @@ async function tryServeStatic(req, res) {
 
     const ext = extname(filePath).toLowerCase()
     const contentType = MIME_TYPES[ext] || 'application/octet-stream'
-    const data = await readFile(filePath)
+    let data = await readFile(filePath)
+    if (pathname === '/manifest.json' && WORKSPACE_BASE) {
+      data = rewriteManifest(data)
+    }
 
     const headers = {
       'Content-Type': contentType,
@@ -242,6 +274,9 @@ async function requestHandler(req, res) {
     for (const [name, value] of Object.entries(ALWAYS_HEADERS)) {
       if (typeof value === 'string') headers[name] = value
     }
+    if (typeof headers.location === 'string') {
+      headers.location = prefixRootUrl(WORKSPACE_BASE, headers.location)
+    }
 
     // /api/* responses must NEVER be cacheable by intermediaries — the SPA
     // uses /api/auth-check, /api/connection-status, etc. to decide whether
@@ -253,7 +288,10 @@ async function requestHandler(req, res) {
     // edge never reuses them. Hash-named assets keep their immutable
     // header (set above in tryServeStatic) and are unaffected here
     // because static assets short-circuit before this branch.
-    const reqPathname = new URL(request.url).pathname
+    const reqPathname = stripWorkspaceBase(
+      WORKSPACE_BASE,
+      new URL(request.url).pathname,
+    )
     if (reqPathname.startsWith('/api/')) {
       headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
       headers['Pragma'] = 'no-cache'

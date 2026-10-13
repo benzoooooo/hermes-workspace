@@ -8,6 +8,7 @@ import {
 } from 'node:fs'
 import { homedir } from 'node:os'
 import { dirname, join } from 'node:path'
+import { cookiePath } from '../lib/workspace-base.mjs'
 
 /**
  * Persistent session token store.
@@ -297,12 +298,16 @@ function shouldSetSecureCookie(): boolean {
  *   - HttpOnly    — blocks JS access, mitigates XSS session theft
  *   - Secure      — HTTPS only (production default, overridable)
  *   - SameSite=Strict — CSRF protection
- *   - Path=/      — available across the whole app
+ *   - Path        — `/` at the origin, or HERMES_WORKSPACE_BASE when mounted under a prefix
  *   - Max-Age     — 30 days
  */
 export function createSessionCookie(token: string): string {
   const attrs = ['HttpOnly']
   if (shouldSetSecureCookie()) attrs.push('Secure')
-  attrs.push('SameSite=Strict', 'Path=/', `Max-Age=${30 * 24 * 60 * 60}`)
+  attrs.push(
+    'SameSite=Strict',
+    `Path=${cookiePath(process.env.HERMES_WORKSPACE_BASE)}`,
+    `Max-Age=${30 * 24 * 60 * 60}`,
+  )
   return `claude-auth=${token}; ${attrs.join('; ')}`
 }

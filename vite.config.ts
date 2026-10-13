@@ -12,6 +12,7 @@ import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 // nitro plugin removed (tanstackStart handles server runtime)
 import { defineConfig, loadEnv } from 'vite'
+import { viteBase } from './src/lib/workspace-base.mjs'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 
 // ---------------------------------------------------------------------------
@@ -432,6 +433,7 @@ const config = defineConfig(({ mode, command }) => {
   }
 
   return {
+    base: viteBase(process.env.HERMES_WORKSPACE_BASE),
     test: {
       exclude: [
         '**/node_modules/**',
